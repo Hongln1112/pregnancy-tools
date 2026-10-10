@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pregnancy Weight Gain Calculator — Healthy Range by BMI</title>
+<meta name="description" content="Free pregnancy weight gain calculator: see the healthy weight gain range for your pre-pregnancy BMI, based on ACOG guidelines.">
+<link rel="canonical" href="https://pregnancy-tools.vercel.app/pregnancy-weight-calculator.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pregnancy Weight Gain Calculator",
+  "url": "https://pregnancy-tools.vercel.app/pregnancy-weight-calculator.html",
+  "applicationCategory": "HealthApplication",
+  "description": "Find the healthy pregnancy weight gain range for your pre-pregnancy BMI, based on ACOG guidelines.",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "920"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much weight should I gain during pregnancy?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It depends on your pre-pregnancy BMI. Underweight mothers gain 28–40 pounds, normal weight 25–35 pounds, overweight 15–25 pounds, and obese 11–20 pounds for a single pregnancy."}
+    },
+    {
+      "@type": "Question",
+      "name": "When does most weight gain happen?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Weight gain is usually slow in the first trimester and speeds up in the second and third trimesters. The ranges are totals for the whole pregnancy."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do the guidelines differ for twins?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The ranges shown here are for single pregnancies. Weight gain guidelines are higher for twins or other multiples, so follow your doctor's specific advice."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#FBF6F3;--card:#ffffff;--ink:#3A2E2A;--muted:#8A7B75;--brand:#D4838A;--brand-dark:#BC6770;--brand-light:#F7E8EA;
+    --good:#6FAE8A;--line:#F0E4E0;--radius:18px;--shadow:0 8px 26px rgba(122,85,75,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:720px;margin:0 auto;padding:36px 18px 56px;}
+  header.top{padding:6px 0 22px;}
+  header.top .brand{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);}
+  header.top .brand span{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--brand);}
+  h1{font-size:clamp(26px,4.5vw,32px);font-weight:800;letter-spacing:-.5px;line-height:1.25;margin:12px 0 10px;}
+  .sub{font-size:16px;color:var(--muted);max-width:620px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;margin-top:26px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .field .hint{font-size:12px;color:var(--muted);font-weight:400;}
+  .input{width:100%;padding:13px 14px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:#FDFBF9;outline:none;transition:border-color .15s;}
+  .input:focus{border-color:var(--brand);background:#fff;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .btn{width:100%;padding:15px;font-size:16px;font-weight:700;color:#fff;background:var(--brand);border:none;border-radius:11px;cursor:pointer;margin-top:6px;transition:background .15s;}
+  .btn:hover{background:var(--brand-dark);}
+  .result{margin-top:24px;border-top:1px solid var(--line);padding-top:20px;}
+  .result.hidden{display:none;}
+  .result .big{font-size:15px;color:var(--muted);font-weight:600;}
+  .result .num{font-size:clamp(26px,5vw,34px);font-weight:800;letter-spacing:-.5px;color:var(--brand-dark);line-height:1.2;margin-top:6px;}
+  .result .detail{font-size:14px;color:var(--muted);margin-top:10px;line-height:1.7;}
+  .section{margin-top:40px;}
+  .section h2{font-size:21px;font-weight:800;letter-spacing:-.3px;margin-bottom:12px;}
+  .section p{font-size:15px;color:#5A463F;margin-bottom:12px;}
+  .section ul{font-size:15px;color:#5A463F;margin:0 0 12px 20px;}
+  .section li{margin-bottom:8px;}
+  .callout{background:var(--brand-light);border-left:4px solid var(--brand);padding:14px 16px;border-radius:10px;margin:14px 0;}
+  .callout strong{color:var(--brand-dark);}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+  .faq-q{padding:15px 18px;font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  .faq-q span{color:var(--brand);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a-inner{padding:0 18px 14px;font-size:14px;color:#5A463F;line-height:1.7;}
+  .back{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--brand-dark);text-decoration:none;}
+  .related{margin-top:8px;font-size:13px;color:var(--muted);}
+  .related a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .more-tools{margin-top:40px;background:var(--brand-light);border-radius:var(--radius);padding:22px 20px;}
+  .more-tools h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .more-tools ul{list-style:none;}
+  .more-tools li{margin-bottom:6px;font-size:14px;}
+  .more-tools a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .disclaimer{font-size:12.5px;color:#9B8A83;margin-top:24px;line-height:1.7;}
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted);}
+  footer a{color:var(--brand-dark);text-decoration:none;}
+  @media (max-width:520px){.card{padding:20px 16px;}.row2{grid-template-columns:1fr;}.wrap{padding:24px 14px 44px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← All pregnancy tools</a>
+  <header class="top">
+    <div class="brand"><span></span> Pregnancy Tools</div>
+    <h1>Pregnancy Weight Gain Calculator</h1>
+    <p class="sub">Enter your pre-pregnancy height and weight to see the healthy weight gain range for your BMI.</p>
+  </header>
+
+  <div class="related">Related: <a href="fetal-size-calculator.html">Fetal Size</a> · <a href="pregnancy-week-calculator.html">Pregnancy Week</a></div>
+
+  <div class="card">
+    <div class="row2">
+      <div class="field">
+        <label for="height_ft">Height — feet</label>
+        <input class="input" id="height_ft" type="number" inputmode="numeric" min="3" max="8" step="1" placeholder="e.g. 5">
+      </div>
+      <div class="field">
+        <label for="height_in">Height — inches</label>
+        <input class="input" id="height_in" type="number" inputmode="numeric" min="0" max="11" step="1" placeholder="e.g. 6">
+      </div>
+    </div>
+    <div class="field">
+      <label for="weight">Pre-pregnancy weight <span class="hint">(in pounds)</span></label>
+      <input class="input" id="weight" type="number" inputmode="decimal" min="50" step="any" placeholder="e.g. 140">
+    </div>
+    <button class="btn" id="calc">Calculate healthy range</button>
+
+    <div class="result hidden" id="result">
+      <div class="big">Your pre-pregnancy BMI</div>
+      <div class="num" id="result-bmi">—</div>
+      <div class="detail" id="result-detail"></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>How to use this calculator</h2>
+    <ul>
+      <li>Enter your <strong>height</strong> in feet and inches before pregnancy.</li>
+      <li>Enter your <strong>pre-pregnancy weight</strong> in pounds.</li>
+      <li>Tap <strong>Calculate healthy range</strong> to see your BMI and the total weight gain range recommended for the whole pregnancy.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Weight gain ranges by BMI</h2>
+    <p>Based on guidelines from the American College of Obstetricians and Gynecologists (ACOG) for a single pregnancy:</p>
+    <ul>
+      <li><strong>Underweight (BMI under 18.5):</strong> gain 28–40 pounds</li>
+      <li><strong>Normal weight (BMI 18.5–24.9):</strong> gain 25–35 pounds</li>
+      <li><strong>Overweight (BMI 25–29.9):</strong> gain 15–25 pounds</li>
+      <li><strong>Obese (BMI 30+):</strong> gain 11–20 pounds</li>
+    </ul>
+    <div class="callout"><strong>These are totals for the whole pregnancy.</strong> Weight gain is usually slow in the first trimester and speeds up in the second and third.</div>
+    <p>Gaining within a healthy range supports your baby's growth and helps you recover more easily after birth. Every body is different — this range is a guideline, not a rule.</p>
+  </section>
+
+  <section class="section">
+    <h2>Common questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">How much weight should I gain during pregnancy?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">It depends on your pre-pregnancy BMI. Underweight mothers gain 28–40 pounds, normal weight 25–35 pounds, overweight 15–25 pounds, and obese 11–20 pounds for a single pregnancy.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">When does most weight gain happen?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Weight gain is usually slow in the first trimester and speeds up in the second and third trimesters. The ranges are totals for the whole pregnancy.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do the guidelines differ for twins?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Yes. The ranges shown here are for single pregnancies. Weight gain guidelines are higher for twins or other multiples, so follow your doctor's specific advice.</div></div>
+    </div>
+  </section>
+
+  <div class="more-tools">
+    <h3>You might also need</h3>
+    <ul>
+      <li><a href="fetal-size-calculator.html">Fetal Size Calculator</a> — what size is your baby this week?</li>
+      <li><a href="pregnancy-week-calculator.html">Pregnancy Week Calculator</a> — what week are you in?</li>
+      <li><a href="due-date-calculator.html">Due Date Calculator</a> — when is your baby expected?</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">Guidelines shown are for single pregnancies. Ranges differ for twins or higher multiples. This is informational only — always follow your doctor or midwife's recommendations.</div>
+
+  <footer><p><a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var result=document.getElementById("result");
+  var bmiEl=document.getElementById("result-bmi");
+  var detail=document.getElementById("result-detail");
+  function compute(){
+    var ft=parseFloat(document.getElementById("height_ft").value);
+    var inch=parseFloat(document.getElementById("height_in").value);
+    var weight=parseFloat(document.getElementById("weight").value);
+    if(isNaN(ft)||isNaN(inch)||isNaN(weight)||ft<=0||weight<=0||inch<0||inch>11){
+      bmiEl.textContent="—";detail.textContent="Please enter your height (feet and inches) and pre-pregnancy weight.";
+      result.classList.remove("hidden");return;
+    }
+    var totalInches=ft*12+inch;
+    if(totalInches<=0){bmiEl.textContent="—";detail.textContent="Please enter a valid height.";result.classList.remove("hidden");return;}
+    var bmi=weight*703/(totalInches*totalInches);
+    bmiEl.textContent=bmi.toFixed(1);
+    var category,range;
+    if(bmi<18.5){category="Underweight";range="28–40 pounds";}
+    else if(bmi<25){category="Normal weight";range="25–35 pounds";}
+    else if(bmi<30){category="Overweight";range="15–25 pounds";}
+    else{category="Obese";range="11–20 pounds";}
+    detail.textContent="Your pre-pregnancy BMI is "+bmi.toFixed(1)+", which is "+category+". A healthy weight gain range for the whole pregnancy is "+range+".";
+    result.classList.remove("hidden");
+  }
+  document.getElementById("calc").addEventListener("click",compute);
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var a=q.nextElementSibling;
+      if(a.style.maxHeight&&a.style.maxHeight!=='0px'){a.style.maxHeight='0px';}
+      else{a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+})();
+</script>
+</body>
+</html>

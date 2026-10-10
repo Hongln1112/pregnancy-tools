@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prenatal Checkup Schedule — What to Expect at Each Week</title>
+<meta name="description" content="Free prenatal appointment schedule: a week-by-week guide to common pregnancy checkups, scans and screenings — from the first visit to your 40-week plan.">
+<link rel="canonical" href="https://pregnancy-tools.vercel.app/prenatal-checkup-schedule.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%85%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Prenatal Checkup Schedule",
+  "url": "https://pregnancy-tools.vercel.app/prenatal-checkup-schedule.html",
+  "applicationCategory": "HealthApplication",
+  "description": "A week-by-week guide to common prenatal appointments, scans and screenings during pregnancy.",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How often are prenatal appointments?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A common schedule is about once a month in the first two trimesters, every 2 weeks around weeks 28–36, then weekly from week 36 to delivery. Exact timing varies by provider."}
+    },
+    {
+      "@type": "Question",
+      "name": "What is the first-trimester screening?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Around 11–13 weeks you may have a combined screening, including a blood test and an ultrasound to measure the nuchal translucency (NT). This screens for common chromosome conditions."}
+    },
+    {
+      "@type": "Question",
+      "name": "When is the anatomy scan?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The detailed anatomy scan (also called the 20-week scan) usually happens around 18–22 weeks. It checks your baby's structures and can often reveal the sex."}
+    },
+    {
+      "@type": "Question",
+      "name": "When is the glucose tolerance test?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Gestational diabetes screening is commonly done around 24–28 weeks with a glucose tolerance test, though timing can vary."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#FBF6F3;--card:#ffffff;--ink:#3A2E2A;--muted:#8A7B75;--brand:#D4838A;--brand-dark:#BC6770;--brand-light:#F7E8EA;
+    --good:#6FAE8A;--line:#F0E4E0;--radius:18px;--shadow:0 8px 26px rgba(122,85,75,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:720px;margin:0 auto;padding:36px 18px 56px;}
+  header.top{padding:6px 0 22px;}
+  header.top .brand{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);}
+  header.top .brand span{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--brand);}
+  h1{font-size:clamp(26px,4.5vw,34px);font-weight:800;letter-spacing:-.5px;line-height:1.25;margin:12px 0 10px;}
+  .sub{font-size:16px;color:var(--muted);max-width:620px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;margin-top:26px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .field .hint{font-size:12px;color:var(--muted);font-weight:400;}
+  .input{width:100%;padding:13px 14px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:#FDFBF9;outline:none;transition:border-color .15s;}
+  .input:focus{border-color:var(--brand);background:#fff;}
+  .btn{width:100%;padding:15px;font-size:16px;font-weight:700;color:#fff;background:var(--brand);border:none;border-radius:11px;cursor:pointer;margin-top:6px;transition:background .15s;}
+  .btn:hover{background:var(--brand-dark);}
+  .result{margin-top:24px;border-top:1px solid var(--line);padding-top:20px;}
+  .result.hidden{display:none;}
+  .result .big{font-size:15px;color:var(--muted);font-weight:600;}
+  .result .num{font-size:clamp(26px,5vw,34px);font-weight:800;letter-spacing:-.5px;color:var(--brand-dark);line-height:1.25;margin-top:6px;}
+  .result .detail{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.7;}
+  .timeline{list-style:none;margin-top:8px;border-left:3px solid var(--brand-light);}
+  .timeline li{position:relative;padding:0 0 18px 22px;}
+  .timeline li::before{content:"";position:absolute;left:-8px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--brand);}
+  .timeline .wk{font-weight:700;color:var(--brand-dark);font-size:15px;}
+  .timeline .what{font-size:14px;color:#5A463F;line-height:1.65;margin-top:2px;}
+  .section{margin-top:40px;}
+  .section h2{font-size:21px;font-weight:800;letter-spacing:-.3px;margin-bottom:12px;}
+  .section p{font-size:15px;color:#5A463F;margin-bottom:12px;}
+  .section ul{font-size:15px;color:#5A463F;margin:0 0 12px 20px;}
+  .section li{margin-bottom:8px;}
+  .callout{background:var(--brand-light);border-left:4px solid var(--brand);padding:14px 16px;border-radius:10px;margin:14px 0;}
+  .callout strong{color:var(--brand-dark);}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+  .faq-q{padding:15px 18px;font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  .faq-q span{color:var(--brand);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a-inner{padding:0 18px 14px;font-size:14px;color:#5A463F;line-height:1.7;}
+  .back{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--brand-dark);text-decoration:none;}
+  .related{margin-top:8px;font-size:13px;color:var(--muted);}
+  .related a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .more-tools{margin-top:40px;background:var(--brand-light);border-radius:var(--radius);padding:22px 20px;}
+  .more-tools h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .more-tools ul{list-style:none;}
+  .more-tools li{margin-bottom:6px;font-size:14px;}
+  .more-tools a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .disclaimer{font-size:12.5px;color:#9B8A83;margin-top:24px;line-height:1.7;}
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted);}
+  footer a{color:var(--brand-dark);text-decoration:none;}
+  @media (max-width:520px){.card{padding:20px 16px;}.wrap{padding:24px 14px 44px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← All pregnancy tools</a>
+  <header class="top">
+    <div class="brand"><span></span> Pregnancy Tools</div>
+    <h1>Prenatal Checkup Schedule</h1>
+    <p class="sub">Enter your pregnancy week to see the common appointments, scans and screenings ahead — and how often you'll likely visit your care team.</p>
+  </header>
+
+  <div class="related">Related: <a href="pregnancy-week-calculator.html">Pregnancy Week</a> · <a href="kick-counter.html">Kick Counter</a></div>
+
+  <div class="card">
+    <div class="field">
+      <label for="week">How many weeks pregnant are you? <span class="hint">(weeks 4–42)</span></label>
+      <input class="input" id="week" type="number" inputmode="numeric" min="4" max="42" step="1" placeholder="e.g. 20">
+    </div>
+    <button class="btn" id="calc">Show my checkup plan</button>
+
+    <div class="result hidden" id="result">
+      <div class="big">Your prenatal care at week</div>
+      <div class="num" id="result-num">—</div>
+      <div class="detail" id="result-detail"></div>
+      <ul class="timeline" id="result-timeline"></ul>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>How to use this guide</h2>
+    <ul>
+      <li>Enter your current pregnancy week to see the typical appointments ahead of you.</li>
+      <li>Use it as a general map — the exact schedule, scans and screenings depend on your provider, country and personal history.</li>
+      <li>Always follow your own care team's plan; this guide is a helpful overview, not a prescription.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>A common appointment timeline</h2>
+    <div class="callout"><strong>Roughly monthly early on, weekly near the end</strong></div>
+    <ul class="timeline">
+      <li><span class="wk">Weeks 8–12</span><div class="what">First prenatal visit — confirm pregnancy, date your due date, blood and urine tests, review your health history.</div></li>
+      <li><span class="wk">Weeks 11–13</span><div class="what">First-trimester screening — a blood test and an NT ultrasound to screen for common chromosome conditions.</div></li>
+      <li><span class="wk">Weeks 16–20</span><div class="what">Follow-up visits, and often a blood test for genetic screening (NIPT or maternal serum screen).</div></li>
+      <li><span class="wk">Weeks 18–22</span><div class="what">Anatomy scan — a detailed ultrasound checking your baby's structures; often reveals the sex.</div></li>
+      <li><span class="wk">Weeks 24–28</span><div class="what">Glucose tolerance test to screen for gestational diabetes, plus a routine visit.</div></li>
+      <li><span class="wk">Weeks 28–36</span><div class="what">Appointments every 2 weeks — growth checks, blood pressure, and your baby's position.</div></li>
+      <li><span class="wk">Weeks 36–40</span><div class="what">Weekly visits — final checks, birth planning, and monitoring until delivery.</div></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Common questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">How often are prenatal appointments?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">A common schedule is about once a month in the first two trimesters, every 2 weeks around weeks 28–36, then weekly from week 36 to delivery. Exact timing varies by provider.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is the first-trimester screening?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Around 11–13 weeks you may have a combined screening, including a blood test and an ultrasound to measure the nuchal translucency (NT). This screens for common chromosome conditions.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">When is the anatomy scan?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">The detailed anatomy scan (also called the 20-week scan) usually happens around 18–22 weeks. It checks your baby's structures and can often reveal the sex.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">When is the glucose tolerance test?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Gestational diabetes screening is commonly done around 24–28 weeks with a glucose tolerance test, though timing can vary.</div></div>
+    </div>
+  </section>
+
+  <div class="more-tools">
+    <h3>You might also need</h3>
+    <ul>
+      <li><a href="pregnancy-week-calculator.html">Pregnancy Week Calculator</a> — what week are you in?</li>
+      <li><a href="kick-counter.html">Kick Counter</a> — track your baby's movements</li>
+      <li><a href="due-date-calculator.html">Due Date Calculator</a> — when is your baby expected?</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">This is a general overview based on common practice and is for informational purposes only. It is not medical advice. Your actual schedule depends on your provider and personal situation.</div>
+
+  <footer><p><a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var result=document.getElementById("result");
+  var num=document.getElementById("result-num");
+  var detail=document.getElementById("result-detail");
+  var timeline=document.getElementById("result-timeline");
+  var all=[
+    {wk:"8–12",what:"First prenatal visit — confirm pregnancy, date your due date, blood and urine tests, review your health history."},
+    {wk:"11–13",what:"First-trimester screening — a blood test and an NT ultrasound to screen for common chromosome conditions."},
+    {wk:"16–20",what:"Follow-up visits, and often a blood test for genetic screening (NIPT or maternal serum screen)."},
+    {wk:"18–22",what:"Anatomy scan — a detailed ultrasound checking your baby's structures; often reveals the sex."},
+    {wk:"24–28",what:"Glucose tolerance test to screen for gestational diabetes, plus a routine visit."},
+    {wk:"28–36",what:"Appointments every 2 weeks — growth checks, blood pressure, and your baby's position."},
+    {wk:"36–40",what:"Weekly visits — final checks, birth planning, and monitoring until delivery."}
+  ];
+  function render(items){
+    timeline.innerHTML="";
+    items.forEach(function(it){
+      var li=document.createElement("li");
+      var s=document.createElement("span");s.className="wk";s.textContent=it.wk;
+      var d=document.createElement("div");d.className="what";d.textContent=it.what;
+      li.appendChild(s);li.appendChild(d);timeline.appendChild(li);
+    });
+  }
+  function compute(){
+    var w=parseInt(document.getElementById("week").value,10);
+    if(isNaN(w)||w<4||w>42){num.textContent="—";detail.textContent="Please enter a week between 4 and 42.";render(all);result.classList.remove("hidden");return;}
+    num.textContent="Week "+w;
+    detail.textContent="Ahead of you: the appointments below are typical around your stage. Check with your care team for your exact plan.";
+    var items=all.filter(function(it){
+      var a=parseInt(it.wk.split("–")[0],10),b=parseInt(it.wk.split("–")[1],10);
+      return w<=b; // show appointments that are still ahead or ongoing
+    });
+    render(items.length?items:all);
+    result.classList.remove("hidden");
+  }
+  document.getElementById("calc").addEventListener("click",compute);
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var a=q.nextElementSibling;
+      if(a.style.maxHeight&&a.style.maxHeight!=='0px'){a.style.maxHeight='0px';}
+      else{a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+})();
+</script>
+</body>
+</html>

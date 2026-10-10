@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fetal Size &amp; Weight Calculator — Baby Size and Weight by Week</title>
+<meta name="description" content="Free fetal size and weight calculator: see roughly how big and heavy your baby is each week of pregnancy, and compare your ultrasound weight with the average.">
+<link rel="canonical" href="https://pregnancy-tools.vercel.app/fetal-size-calculator.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%8E%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Fetal Size and Weight Calculator",
+  "url": "https://pregnancy-tools.vercel.app/fetal-size-calculator.html",
+  "applicationCategory": "HealthApplication",
+  "description": "See roughly how big and heavy your baby is each week of pregnancy, and compare an ultrasound weight estimate with the weekly average.",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How big is my baby at each week of pregnancy?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Sizes grow quickly — from a poppy seed around week 4 to a small pumpkin around week 40. This calculator gives a fruit comparison, length, and average weight for each week from 4 to 42."}
+    },
+    {
+      "@type": "Question",
+      "name": "How much should my baby weigh this week?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Weights rise steadily — around 300 g (10 oz) at week 20, about 1,000 g (2.2 lb) at week 28, and roughly 3,400 g (7.5 lb) at week 40. These are averages; every baby grows a little differently."}
+    },
+    {
+      "@type": "Question",
+      "name": "What does an ultrasound weight percentile mean?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A percentile compares your baby's estimated weight with other babies at the same week. Around the 50th percentile is average; below the 10th or above the 90th is worth discussing with your care team, but most are simply a sign of normal variation."}
+    },
+    {
+      "@type": "Question",
+      "name": "Are these fetal size estimates accurate?",
+      "acceptedAnswer": {"@type": "Answer", "text": "They are general estimates for illustration. Every pregnancy grows a little differently, and ultrasound measurements are the most accurate way to check your baby's size and weight."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#FBF6F3;--card:#ffffff;--ink:#3A2E2A;--muted:#8A7B75;--brand:#D4838A;--brand-dark:#BC6770;--brand-light:#F7E8EA;
+    --good:#6FAE8A;--line:#F0E4E0;--radius:18px;--shadow:0 8px 26px rgba(122,85,75,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:720px;margin:0 auto;padding:36px 18px 56px;}
+  header.top{padding:6px 0 22px;}
+  header.top .brand{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);}
+  header.top .brand span{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--brand);}
+  h1{font-size:clamp(26px,4.5vw,32px);font-weight:800;letter-spacing:-.5px;line-height:1.25;margin:12px 0 10px;}
+  .sub{font-size:16px;color:var(--muted);max-width:620px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;margin-top:26px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .field .hint{font-size:12px;color:var(--muted);font-weight:400;}
+  .input{width:100%;padding:13px 14px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:#FDFBF9;outline:none;transition:border-color .15s;}
+  .input:focus{border-color:var(--brand);background:#fff;}
+  .btn{width:100%;padding:15px;font-size:16px;font-weight:700;color:#fff;background:var(--brand);border:none;border-radius:11px;cursor:pointer;margin-top:6px;transition:background .15s;}
+  .btn:hover{background:var(--brand-dark);}
+  .result{margin-top:24px;border-top:1px solid var(--line);padding-top:20px;}
+  .result.hidden{display:none;}
+  .result .big{font-size:15px;color:var(--muted);font-weight:600;}
+  .result .emoji{font-size:44px;margin-top:6px;}
+  .result .num{font-size:clamp(24px,4.8vw,32px);font-weight:800;letter-spacing:-.5px;color:var(--brand-dark);line-height:1.25;margin-top:6px;}
+  .result .detail{font-size:14px;color:var(--muted);margin-top:10px;line-height:1.7;}
+  .result .weight{padding:14px 16px;background:var(--brand-light);border-radius:12px;margin-top:14px;font-size:15px;color:#5A463F;line-height:1.7;}
+  .result .weight strong{color:var(--brand-dark);}
+  .result .cmp{font-size:14px;margin-top:12px;padding:11px 14px;border-radius:10px;}
+  .cmp.below{background:#FBE9E9;color:#A34F4F;}
+  .cmp.avg{background:#E9F3EF;color:#3E7D5F;}
+  .cmp.above{background:#FDF3D8;color:#A8892B;}
+  .section{margin-top:40px;}
+  .section h2{font-size:21px;font-weight:800;letter-spacing:-.3px;margin-bottom:12px;}
+  .section p{font-size:15px;color:#5A463F;margin-bottom:12px;}
+  .section ul{font-size:15px;color:#5A463F;margin:0 0 12px 20px;}
+  .section li{margin-bottom:8px;}
+  .callout{background:var(--brand-light);border-left:4px solid var(--brand);padding:14px 16px;border-radius:10px;margin:14px 0;}
+  .callout strong{color:var(--brand-dark);}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+  .faq-q{padding:15px 18px;font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  .faq-q span{color:var(--brand);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a-inner{padding:0 18px 14px;font-size:14px;color:#5A463F;line-height:1.7;}
+  .back{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--brand-dark);text-decoration:none;}
+  .related{margin-top:8px;font-size:13px;color:var(--muted);}
+  .related a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .more-tools{margin-top:40px;background:var(--brand-light);border-radius:var(--radius);padding:22px 20px;}
+  .more-tools h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .more-tools ul{list-style:none;}
+  .more-tools li{margin-bottom:6px;font-size:14px;}
+  .more-tools a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .disclaimer{font-size:12.5px;color:#9B8A83;margin-top:24px;line-height:1.7;}
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted);}
+  footer a{color:var(--brand-dark);text-decoration:none;}
+  @media (max-width:520px){.card{padding:20px 16px;}.wrap{padding:24px 14px 44px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← All pregnancy tools</a>
+  <header class="top">
+    <div class="brand"><span></span> Pregnancy Tools</div>
+    <h1>Fetal Size &amp; Weight Calculator</h1>
+    <p class="sub">Enter your pregnancy week to see roughly how big and heavy your baby is — then compare your ultrasound weight with the average.</p>
+  </header>
+
+  <div class="related">Related: <a href="pregnancy-week-calculator.html">Pregnancy Week</a> · <a href="due-date-calculator.html">Due Date</a></div>
+
+  <div class="card">
+    <div class="field">
+      <label for="week">How many weeks pregnant are you? <span class="hint">(weeks 4–42)</span></label>
+      <input class="input" id="week" type="number" inputmode="numeric" min="4" max="42" step="1" placeholder="e.g. 20">
+    </div>
+    <div class="field">
+      <label for="ew">Your ultrasound weight estimate <span class="hint">(grams, optional)</span></label>
+      <input class="input" id="ew" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 320">
+    </div>
+    <button class="btn" id="calc">Show baby's size &amp; weight</button>
+
+    <div class="result hidden" id="result">
+      <div class="big">Your baby is about the size of a</div>
+      <div class="emoji" id="result-emoji">—</div>
+      <div class="num" id="result-num">—</div>
+      <div class="detail" id="result-detail"></div>
+      <div class="weight" id="result-weight"></div>
+      <div class="cmp" id="result-cmp"></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>How to use this calculator</h2>
+    <ul>
+      <li>Enter <strong>how many weeks pregnant</strong> you are to see your baby's fruit size, length, and average weight for that week.</li>
+      <li>If you have an <strong>ultrasound weight estimate</strong>, add it in grams to see whether your baby is below, around, or above the weekly average.</li>
+      <li>Growth is steady and individual — check back each week and talk to your care team about any concerns.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>About the estimates</h2>
+    <div class="callout"><strong>Sizes and weights are general estimates for illustration</strong></div>
+    <p>Every pregnancy grows a little differently, and ultrasound measurements are the most accurate way to check your baby's size and weight. The averages here are typical references — from around <strong>300 g (10 oz)</strong> at week 20 to roughly <strong>3,400 g (7.5 lb)</strong> at week 40 — but your baby's actual scan numbers are what matter most.</p>
+  </section>
+
+  <section class="section">
+    <h2>Common questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">How big is my baby at each week of pregnancy?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Sizes grow quickly — from a poppy seed around week 4 to a small pumpkin around week 40. This calculator gives a fruit comparison, length, and average weight for each week from 4 to 42.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How much should my baby weigh this week?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Weights rise steadily — around 300 g (10 oz) at week 20, about 1,000 g (2.2 lb) at week 28, and roughly 3,400 g (7.5 lb) at week 40. These are averages; every baby grows a little differently.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What does an ultrasound weight percentile mean?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">A percentile compares your baby's estimated weight with other babies at the same week. Around the 50th percentile is average; below the 10th or above the 90th is worth discussing with your care team, but most are simply a sign of normal variation.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are these fetal size estimates accurate?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">They are general estimates for illustration. Every pregnancy grows a little differently, and ultrasound measurements are the most accurate way to check your baby's size and weight.</div></div>
+    </div>
+  </section>
+
+  <div class="more-tools">
+    <h3>You might also need</h3>
+    <ul>
+      <li><a href="pregnancy-week-calculator.html">Pregnancy Week Calculator</a> — find out what week you're in first</li>
+      <li><a href="pregnancy-weight-calculator.html">Weight Gain Calculator</a> — healthy range for your BMI</li>
+      <li><a href="due-date-calculator.html">Due Date Calculator</a> — when is your baby expected?</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">Informational estimates only. If you have concerns about your baby's growth, talk to your doctor or midwife.</div>
+
+  <footer><p><a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var result=document.getElementById("result");
+  var emoji=document.getElementById("result-emoji");
+  var num=document.getElementById("result-num");
+  var detail=document.getElementById("result-detail");
+  var wbox=document.getElementById("result-weight");
+  var cmp=document.getElementById("result-cmp");
+  var sizes=[
+    {w:4,n:"a poppy seed",e:"🌱",d:"About 0.04 inches long.",g:0},
+    {w:5,n:"a sesame seed",e:"🌱",d:"About 0.1 inches long.",g:1},
+    {w:6,n:"a lentil",e:"🫘",d:"About 0.25 inches long.",g:2},
+    {w:7,n:"a blueberry",e:"🫐",d:"About 0.5 inches long.",g:2},
+    {w:8,n:"a raspberry",e:"🫐",d:"About 0.6 inches long.",g:3},
+    {w:9,n:"a cherry",e:"🍒",d:"About 0.9 inches long.",g:4},
+    {w:10,n:"a strawberry",e:"🍓",d:"About 1.2 inches long.",g:5},
+    {w:11,n:"a fig",e:"🍐",d:"About 1.6 inches long.",g:8},
+    {w:12,n:"a lime",e:"🍋",d:"About 2.1 inches long.",g:14},
+    {w:13,n:"a lemon",e:"🍋",d:"About 2.9 inches long.",g:23},
+    {w:14,n:"a peach",e:"🍑",d:"About 3.5 inches long.",g:45},
+    {w:15,n:"an apple",e:"🍎",d:"About 4 inches long.",g:70},
+    {w:16,n:"an avocado",e:"🥑",d:"About 4.6 inches long.",g:100},
+    {w:17,n:"a pear",e:"🍐",d:"About 5 inches long.",g:140},
+    {w:18,n:"a bell pepper",e:"🫑",d:"About 5.6 inches long.",g:190},
+    {w:19,n:"a mango",e:"🥭",d:"About 6 inches long.",g:250},
+    {w:20,n:"a banana",e:"🍌",d:"About 6.5 inches long.",g:300},
+    {w:21,n:"a carrot",e:"🥕",d:"About 7 inches long.",g:360},
+    {w:22,n:"a papaya",e:"🥭",d:"About 7.5 inches long.",g:430},
+    {w:23,n:"a grapefruit",e:"🍊",d:"About 8 inches long.",g:500},
+    {w:24,n:"an ear of corn",e:"🌽",d:"About 8.5 inches long.",g:600},
+    {w:25,n:"a rutabaga",e:"🥔",d:"About 9 inches long.",g:700},
+    {w:26,n:"a head of lettuce",e:"🥬",d:"About 9.5 inches long.",g:820},
+    {w:27,n:"a cauliflower",e:"🥦",d:"About 10 inches long.",g:910},
+    {w:28,n:"an eggplant",e:"🍆",d:"About 10.5 inches long.",g:1000},
+    {w:29,n:"a butternut squash",e:"🎃",d:"About 11 inches long.",g:1150},
+    {w:30,n:"a cabbage",e:"🥬",d:"About 11.5 inches long.",g:1300},
+    {w:31,n:"a coconut",e:"🥥",d:"About 12 inches long.",g:1500},
+    {w:32,n:"a jicama",e:"🥔",d:"About 12.5 inches long.",g:1700},
+    {w:33,n:"a pineapple",e:"🍍",d:"About 13 inches long.",g:1900},
+    {w:34,n:"a cantaloupe",e:"🍈",d:"About 13.5 inches long.",g:2100},
+    {w:35,n:"a honeydew melon",e:"🍈",d:"About 14 inches long.",g:2400},
+    {w:36,n:"a romaine lettuce",e:"🥬",d:"About 14 inches long.",g:2600},
+    {w:37,n:"a bunch of swiss chard",e:"🥬",d:"About 14.5 inches long.",g:2900},
+    {w:38,n:"a leek",e:"🥬",d:"About 15 inches long.",g:3100},
+    {w:39,n:"a mini watermelon",e:"🍉",d:"About 15 inches long.",g:3300},
+    {w:40,n:"a small pumpkin",e:"🎃",d:"About 16 inches long.",g:3400},
+    {w:41,n:"a watermelon",e:"🍉",d:"About 17 inches long.",g:3600},
+    {w:42,n:"a full watermelon",e:"🍉",d:"About 18 inches long.",g:3700}
+  ];
+  function lb(g){return (g/453.592).toFixed(1);}
+  function compute(){
+    var w=parseInt(document.getElementById("week").value,10);
+    if(isNaN(w)||w<4||w>42){emoji.textContent="—";num.textContent="—";detail.textContent="Please enter a week between 4 and 42.";wbox.textContent="";cmp.textContent="";cmp.className="cmp";result.classList.remove("hidden");return;}
+    var item=sizes[w-4];
+    emoji.textContent=item.e;
+    num.textContent="about "+item.n;
+    detail.textContent=item.d;
+    wbox.innerHTML="<strong>Average weight at week "+w+":</strong> about "+item.g+" g ("+lb(item.g)+" lb)";
+    cmp.textContent="";cmp.className="cmp";
+    var ew=parseInt(document.getElementById("ew").value,10);
+    if(!isNaN(ew)&&ew>0){
+      if(ew<item.g*0.85){cmp.textContent="Your scan estimate ("+ew+" g) is below the weekly average of about "+item.g+" g.";cmp.className="cmp below";}
+      else if(ew>item.g*1.15){cmp.textContent="Your scan estimate ("+ew+" g) is above the weekly average of about "+item.g+" g.";cmp.className="cmp above";}
+      else{cmp.textContent="Your scan estimate ("+ew+" g) is around the weekly average of about "+item.g+" g.";cmp.className="cmp avg";}
+    }
+    result.classList.remove("hidden");
+  }
+  document.getElementById("calc").addEventListener("click",compute);
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var a=q.nextElementSibling;
+      if(a.style.maxHeight&&a.style.maxHeight!=='0px'){a.style.maxHeight='0px';}
+      else{a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+})();
+</script>
+</body>
+</html>

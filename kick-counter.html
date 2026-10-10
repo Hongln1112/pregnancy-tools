@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kick Counter — Count Baby's Movements</title>
+<meta name="description" content="Free baby kick counter: tap each time you feel your baby move to track movements over a session and check they're within a healthy range.">
+<link rel="canonical" href="https://pregnancy-tools.vercel.app/kick-counter.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%91%A3%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pregnancy Kick Counter",
+  "url": "https://pregnancy-tools.vercel.app/kick-counter.html",
+  "applicationCategory": "HealthApplication",
+  "description": "Track how often you feel your baby move by tapping a button each time, then see the total and pace for the session.",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many kicks are normal?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A common guideline is that your baby should move at least 10 times within 2 hours — the 'count-to-ten' method. Every baby has their own pattern, so get to know yours and contact your care team if movement drops."}
+    },
+    {
+      "@type": "Question",
+      "name": "When should I start counting kicks?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Most care providers suggest tracking movements regularly from around 28 weeks, when movement patterns become more established."}
+    },
+    {
+      "@type": "Question",
+      "name": "What should I do if I feel fewer movements?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Try a quiet session, lie on your side, and count for a while. If you still notice clearly fewer movements than usual, contact your doctor or midwife right away — never wait it out."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#FBF6F3;--card:#ffffff;--ink:#3A2E2A;--muted:#8A7B75;--brand:#D4838A;--brand-dark:#BC6770;--brand-light:#F7E8EA;
+    --good:#6FAE8A;--bad:#C66B6B;--line:#F0E4E0;--radius:18px;--shadow:0 8px 26px rgba(122,85,75,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:720px;margin:0 auto;padding:36px 18px 56px;}
+  header.top{padding:6px 0 22px;}
+  header.top .brand{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);}
+  header.top .brand span{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--brand);}
+  h1{font-size:clamp(26px,4.5vw,34px);font-weight:800;letter-spacing:-.5px;line-height:1.25;margin:12px 0 10px;}
+  .sub{font-size:16px;color:var(--muted);max-width:620px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;margin-top:26px;text-align:center;}
+  .counter{font-size:clamp(52px,12vw,76px);font-weight:800;letter-spacing:-2px;color:var(--brand-dark);line-height:1;}
+  .counter-label{font-size:14px;color:var(--muted);margin-top:4px;}
+  .kick{width:180px;height:180px;margin:24px auto 0;border-radius:50%;border:none;background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(188,103,112,.35);transition:transform .1s ease,background .15s;}
+  .kick:active{transform:scale(.96);}
+  .meta{display:flex;justify-content:space-between;gap:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:18px;}
+  .meta div{flex:1;background:#FBF6F3;border-radius:12px;padding:12px 8px;}
+  .meta .m-label{font-size:12px;color:var(--muted);}
+  .meta .m-val{font-size:22px;font-weight:700;color:var(--ink);margin-top:2px;}
+  .hint-box{margin-top:16px;padding:13px 16px;border-radius:12px;font-size:14px;line-height:1.7;}
+  .hint-box.good{background:#E9F3EF;color:#3E7D5F;}
+  .hint-box.info{background:var(--brand-light);color:var(--brand-dark);}
+  .reset{display:inline-block;margin-top:18px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;text-decoration:underline;}
+  .section{margin-top:40px;text-align:left;}
+  .section h2{font-size:21px;font-weight:800;letter-spacing:-.3px;margin-bottom:12px;}
+  .section p{font-size:15px;color:#5A463F;margin-bottom:12px;}
+  .section ul{font-size:15px;color:#5A463F;margin:0 0 12px 20px;}
+  .section li{margin-bottom:8px;}
+  .callout{background:var(--brand-light);border-left:4px solid var(--brand);padding:14px 16px;border-radius:10px;margin:14px 0;}
+  .callout strong{color:var(--brand-dark);}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;text-align:left;}
+  .faq-q{padding:15px 18px;font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  .faq-q span{color:var(--brand);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a-inner{padding:0 18px 14px;font-size:14px;color:#5A463F;line-height:1.7;}
+  .back{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--brand-dark);text-decoration:none;}
+  .related{margin-top:8px;font-size:13px;color:var(--muted);text-align:left;}
+  .related a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .more-tools{margin-top:40px;background:var(--brand-light);border-radius:var(--radius);padding:22px 20px;text-align:left;}
+  .more-tools h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .more-tools ul{list-style:none;}
+  .more-tools li{margin-bottom:6px;font-size:14px;}
+  .more-tools a{color:var(--brand-dark);text-decoration:none;font-weight:600;}
+  .disclaimer{font-size:12.5px;color:#9B8A83;margin-top:24px;line-height:1.7;text-align:left;}
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted);}
+  footer a{color:var(--brand-dark);text-decoration:none;}
+  @media (max-width:520px){.card{padding:20px 16px;}.wrap{padding:24px 14px 44px;}.kick{width:150px;height:150px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← All pregnancy tools</a>
+  <header class="top">
+    <div class="brand"><span></span> Pregnancy Tools</div>
+    <h1>Kick Counter</h1>
+    <p class="sub">Tap every time you feel your baby move. Watch the count and pace to keep an eye on your baby's activity.</p>
+  </header>
+
+  <div class="related">Related: <a href="pregnancy-week-calculator.html">Pregnancy Week</a> · <a href="prenatal-checkup-schedule.html">Checkup Schedule</a></div>
+
+  <div class="card">
+    <div class="counter" id="count">0</div>
+    <div class="counter-label">movements this session</div>
+
+    <button class="kick" id="kick">I felt a kick!</button>
+
+    <div class="meta">
+      <div><div class="m-label">Time counting</div><div class="m-val" id="elapsed">0:00</div></div>
+      <div><div class="m-label">Movements</div><div class="m-val" id="moves">0</div></div>
+      <div><div class="m-label">Per 10 min</div><div class="m-val" id="rate">—</div></div>
+    </div>
+
+    <div class="hint-box info" id="hint">Sit or lie on your side, relax, and tap each time you feel movement. A common guide is at least 10 movements within 2 hours.</div>
+
+    <div class="reset" id="reset">Start a new session</div>
+  </div>
+
+  <section class="section">
+    <h2>How to use the kick counter</h2>
+    <ul>
+      <li>Pick a time when your baby is usually active, <strong>sit quietly or lie on your side</strong>, and tap <strong>I felt a kick!</strong> every time you feel movement.</li>
+      <li>Continue until you've counted <strong>10 movements</strong> or for about <strong>2 hours</strong>, whichever comes first.</li>
+      <li>The session shows your total, how long you've been counting, and your pace per 10 minutes.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>What's a healthy pattern?</h2>
+    <div class="callout"><strong>A common guide: at least 10 movements within 2 hours</strong></div>
+    <p>Every baby has its own rhythm — some are more active in the morning, others at night. What matters most is that your baby's pattern doesn't clearly drop from what's normal for you. From around <strong>28 weeks</strong>, movements become more established, which is when most providers suggest counting regularly.</p>
+  </section>
+
+  <section class="section">
+    <h2>Common questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">How many kicks are normal?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">A common guideline is that your baby should move at least 10 times within 2 hours — the 'count-to-ten' method. Every baby has their own pattern, so get to know yours and contact your care team if movement drops.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">When should I start counting kicks?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Most care providers suggest tracking movements regularly from around 28 weeks, when movement patterns become more established.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What should I do if I feel fewer movements?<span>▾</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Try a quiet session, lie on your side, and count for a while. If you still notice clearly fewer movements than usual, contact your doctor or midwife right away — never wait it out.</div></div>
+    </div>
+  </section>
+
+  <div class="more-tools">
+    <h3>You might also need</h3>
+    <ul>
+      <li><a href="pregnancy-week-calculator.html">Pregnancy Week Calculator</a> — what week are you in?</li>
+      <li><a href="prenatal-checkup-schedule.html">Prenatal Checkup Schedule</a> — which appointments are coming up?</li>
+      <li><a href="fetal-size-calculator.html">Fetal Size Calculator</a> — how big is your baby now?</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">This tool is for your own tracking and is for informational purposes only. It is not medical advice. If you are ever concerned about reduced movement, contact your doctor or midwife immediately.</div>
+
+  <footer><p><a href="about.html">About</a> · <a href="privacy.html">Privacy</a></p></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var count=document.getElementById("count");
+  var elapsed=document.getElementById("elapsed");
+  var moves=document.getElementById("moves");
+  var rate=document.getElementById("rate");
+  var hint=document.getElementById("hint");
+  var start=null,last=null,total=0;
+  function pad(n){return n<10?"0"+n:n;}
+  function tick(){
+    if(!start)return;
+    var sec=Math.round((Date.now()-start)/1000);
+    var m=Math.floor(sec/60),s=sec%60;
+    elapsed.textContent=m+":"+pad(s);
+  }
+  function updateRate(){
+    if(!start){rate.textContent="—";return;}
+    var mins=(Date.now()-start)/60000;
+    rate.textContent=mins>=1?((total/mins*10).toFixed(1)):"0.0";
+    if(total>=10){
+      hint.className="hint-box good";
+      hint.textContent="You've counted 10 movements — a healthy sign. Keep a note and share it at your next visit.";
+    }else{
+      hint.className="hint-box info";
+      hint.textContent="Keep going — a common guide is at least 10 movements within 2 hours. Every baby has its own rhythm.";
+    }
+  }
+  function addMove(){
+    var now=Date.now();
+    if(!start)start=now;
+    last=now;
+    total++;
+    moves.textContent=total;
+    count.textContent=total;
+    updateRate();
+  }
+  function reset(){
+    start=null;last=null;total=0;
+    moves.textContent=0;count.textContent=0;elapsed.textContent="0:00";rate.textContent="—";
+    hint.className="hint-box info";
+    hint.textContent="Sit or lie on your side, relax, and tap each time you feel movement. A common guide is at least 10 movements within 2 hours.";
+  }
+  document.getElementById("kick").addEventListener("click",addMove);
+  document.getElementById("reset").addEventListener("click",reset);
+  setInterval(tick,1000);
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var a=q.nextElementSibling;
+      if(a.style.maxHeight&&a.style.maxHeight!=='0px'){a.style.maxHeight='0px';}
+      else{a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+})();
+</script>
+</body>
+</html>
