@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pregnancy-tools.vercel.app/sitemap.xml
+Sitemap: https://pregnancy-tools-psi.vercel.app/sitemap.xml
