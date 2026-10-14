@@ -31,4 +31,5 @@
   <url><loc>https://pregnancy-tools-psi.vercel.app/fetal-week-40.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://pregnancy-tools-psi.vercel.app/about.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://pregnancy-tools-psi.vercel.app/privacy.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://pregnancy-tools-psi.vercel.app/contact.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
 </urlset>
